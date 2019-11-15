@@ -24,7 +24,7 @@ def getabouturl(url):
 
 def write(url, message, name='', mail='sage'):
     host, board_key, thread_key = getabouturl(url)
-    postto   = 'http://{host}/test/bbs.cgi'.format(host=host)
+    postto  = 'http://{host}/test/bbs.cgi'.format(host=host)
     postdata = dict(
         bbs = board_key,
         key = thread_key,
@@ -37,11 +37,13 @@ def write(url, message, name='', mail='sage'):
     )
     params = urlencode(postdata)
 
-    request = urllib2.Request(postto, params, {'Referer': url})
+    request = urllib.request.Request(postto, params, {'Referer': url})
 
     while True:
         reader = opener.open(request)
+        print(reader)
         cont = unicode(reader.read(), 'sjis')
+
         if u'書きこみました' in cont or u'2ch_X:true' in cont:
             return
         elif u'2ch_X:false' in cont:
@@ -53,12 +55,10 @@ def write(url, message, name='', mail='sage'):
 
 
 def main():
-    import sys
     import time
-    import httplib2
 
     # url = sys.argv[1]
-    url ='http://egg.5ch.net/test/read.cgi/ffo/1500024397/'
+    url = 'http://egg.5ch.net/test/read.cgi/ffo/1500024397/'
     mes = u'ほしゅ'
 
     host, board_key, thread_key = getabouturl(url)
@@ -76,10 +76,10 @@ def main():
             request.add_header('If-Modified-Since', lastmod)
         except urllib.error.HTTPError as e:
             code = e.code
-        if code == httplib2.OK:
+        if code == 200:
             print('sleeping...')
             time.sleep(60 * 15)
-        elif code == httplib2.NOT_MODIFIED:
+        elif code == 304:
             write(url, mes)
 
 
