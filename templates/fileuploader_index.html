@@ -1,0 +1,16 @@
+{% extends "layout.html" %}
+{% block content %}
+<title>FileUploader</title>
+<h1>FileUploader</h1>
+<form action="/Upload" method="post" enctype="multipart/form-data">
+  <input type="file" name="uploadFile"/>
+  <input type="submit" value="submit"/>
+</form>
+    {% for file in files: %}
+        <p>
+            <a href=/Download/{{ file }}>{{ file }}</a>
+            <a href=/Delete/{{ file }}><img src="images/trash.png" width="15" height="15"></a>
+        </p>
+    {% endfor %}
+{% endblock %}
+
