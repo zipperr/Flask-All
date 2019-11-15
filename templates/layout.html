@@ -5,16 +5,20 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <style type="text/css">
         <!--
-        ul {
-            overflow:hidden;
-            list-style:none;
-            margin: 0 auto;
-            z-index: 20;
-        }
-        ul li {
-            display: inline-block;
-            padding: 26px 10px 20px 10px;
-        }
+ul {
+  display: flex;
+  /*justify-content: space-between;*/
+}
+li {
+  list-style-type: none;
+  background-color: #fff;
+  color: #000;
+  flex-grow: 1;
+  text-align: center;
+}
+li + li {
+  border-left: 1px solid #000;
+}
         .menu_btn{
             text-align: center;
             position: relative;
@@ -53,6 +57,9 @@
         <ul>
             <li><a href={{ url_for('index') }} class="menu_btn">FileUploader</a></li>
             <li><a href={{ url_for('main') }} class="menu_btn">BBS</a></li>
+            <li><a href="#" class="menu_btn">Dummy</a></li>
+            <li><a href="#" class="menu_btn">Dummy</a></li>
+            <li><a href="#" class="menu_btn">Dummy</a></li>
         </ul>
     </head>
     <body>
